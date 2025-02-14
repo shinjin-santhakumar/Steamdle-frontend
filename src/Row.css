@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+    --position: 0;
+    --lenthAnimation: 0s;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.box {
+    --lenthAnimation: 0s;
+    -webkit-animation: flip 0.5s;
+    animation: flip 0.5s;
+    animation-delay: var(--lenthAnimation);
+}
+@-webkit-keyframes flip {
+    from {
+        transform: rotateX(90deg)
+    }
+    to {
+        transform: rotateX(0deg)
+    }
+}
+@keyframes flip {
+    from {
+        transform: rotateX(90deg)
+    }
+    to {
+        transform: rotateX(0deg)
+    }
+}
+
+img {
+    padding: 0%;
+}
+
+.row {
+    margin: 2rem;
+    height: 4rem;
+}
