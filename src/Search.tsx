@@ -53,9 +53,14 @@ function DebouncedSearchBar({ stateChanger }) {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      console.log("pressed enter: looking for " + options[0].name);
+      console.log(
+        "pressed enter: looking for " +
+          options[0].name +
+          " with id " +
+          options[0].appid
+      );
 
-      handleGetRequest(options[0].app_id);
+      handleGetRequest(options[0].appid);
     }
   };
 
@@ -83,8 +88,8 @@ function DebouncedSearchBar({ stateChanger }) {
         {options.map((option) => (
           <option
             key={option.value}
-            value={option.app_id}
-            onClick={(event) => handleGetRequest(option.app_id)}
+            value={option.appid}
+            onClick={(event) => handleGetRequest(option.appid)}
           >
             {option.name}
           </option>

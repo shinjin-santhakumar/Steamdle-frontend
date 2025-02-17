@@ -1,4 +1,5 @@
 import "./Row.css";
+import up from "./assets/up.png";
 
 interface RowStyle {
   "--lenthAnimation": string;
@@ -14,30 +15,22 @@ function Row(props) {
 
   console.log(props);
   let game = props.data.data2[props.app_id].data;
+  let answers = props.data.colors;
+  console.log(answers);
 
-  let db_data = props.data.data1[0];
+  let reviewData = props.data.data1;
 
   //console.log(props);
+  // console.log(data1);
+  // console.log();
 
   return (
     <div className="row">
       <>
-        {/* <h1 className="text-3xl font-bold underline"> Hello world! </h1> */}
-        <div className="grid grid-cols-6 gap-7">
-          <div
-            className="p-8 box border-2 border-solid"
-            style={
-              {
-                "--lenthAnimation":
-                  (startAnimation + 0.5).toString() + lenthAnimation,
-              } as React.CSSProperties
-            }
-          >
-            {game.name}
-          </div>
-
+        <div className="border-indigo-500 border-6 grid grid-cols-6 gap-7 h-24">
           <img
-            className="p-8 box border-2 border-solid img"
+            id="header"
+            className="pt-2 border-2 border-solid"
             style={
               {
                 "--lenthAnimation":
@@ -49,35 +42,39 @@ function Row(props) {
           />
 
           <div
-            className="p-8 box border-2 border-solid"
+            className="pt-2 border-2 border-solid ele"
             style={
               {
                 "--lenthAnimation":
                   (startAnimation + 1.5).toString() + lenthAnimation,
+                color: answers["release_date"],
               } as React.CSSProperties
             }
           >
-            {game.release_date.date}
+            {game.release_date.date.slice(-4)}
+            {/* <img id="bg_date" src={up} /> */}
           </div>
 
           <div
-            className="p-8 box border-2 border-solid"
+            className="pt-2 border-2 border-solid ele"
             style={
               {
                 "--lenthAnimation":
                   (startAnimation + 2).toString() + lenthAnimation,
+                color: answers["developers"],
               } as React.CSSProperties
             }
           >
-            {game.developers[0]}
+            {game.developers.map((temp) => temp).join(", ")}
           </div>
 
           <div
-            className="p-8 box border-2 border-solid"
+            className="pt-2 border-2 border-solid ele"
             style={
               {
                 "--lenthAnimation":
                   (startAnimation + 2.5).toString() + lenthAnimation,
+                color: answers["price"],
               } as React.CSSProperties
             }
           >
@@ -87,28 +84,31 @@ function Row(props) {
           </div>
 
           <div
-            className="p-8 box border-2 border-solid"
+            className="pt-2 border-2 border-solid ele"
             style={
               {
                 "--lenthAnimation":
                   (startAnimation + 3).toString() + lenthAnimation,
+                color: answers["genres"],
               } as React.CSSProperties
             }
           >
-            {db_data.genres}
+            {game.genres.map((temp) => temp.description).join(", ")}
+          </div>
+
+          <div
+            className="pt-2 border-2 border-solid ele"
+            style={
+              {
+                "--lenthAnimation":
+                  (startAnimation + 0.5).toString() + lenthAnimation,
+                color: answers["reviews"],
+              } as React.CSSProperties
+            }
+          >
+            {reviewData.query_summary.review_score_desc}
           </div>
         </div>
-        {/* <ul>
-            <li key={game.app_id}></li>
-            
-            <li key={game.app_id}>{}</li>
-        </ul> */}
-
-        {/* <li key={game.app_id}>{game.review_score_description}</li>` */}
-        {/* <li key={game.app_id}>{game.developer}</li>
-        <li key={game.app_id}>{game.publisher}</li>
-        <li key={game.app_id}>{game.price}</li>
-        <li key={game.app_id}>{}</li> */}
       </>
     </div>
   );
