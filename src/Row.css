@@ -9,27 +9,34 @@ ul {
     list-style-type: none;
 }
 
-.box {
+.animation {
     --lenthAnimation: 0s;
     -webkit-animation: flip 0.5s;
-    animation: flip 0.5s;
+    animation: flip 0.5s forwards;
     animation-delay: var(--lenthAnimation);
 }
+
 @-webkit-keyframes flip {
-    from {
+    /* from {
         transform: rotateX(90deg)
     }
     to {
         transform: rotateX(0deg)
     }
+      */
 }
 @keyframes flip {
     from {
-        transform: rotateX(90deg)
+        transform: rotateY(0deg)
     }
     to {
-        transform: rotateX(0deg)
+        transform: rotateY(180deg)
     }
+}
+
+#bg_date {
+    height: 50%;
+    z-index: -1;
 }
 
 #header {
@@ -38,11 +45,51 @@ ul {
 }
 
 .row {
-    margin: 2rem;
-    
+    margin-left: 30rem;
+    margin-top: 1rem;
+    margin-right: 30rem;
+    background-color: #313236;
 }
 
 .ele {
     text-align: center;
     overflow: hidden;
 }
+
+img.center {
+    display: block;
+    margin: 0 auto;
+    width: 4rem;
+}
+
+.card-holder {
+
+    height: 100%;
+    margin: auto;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+
+}
+
+.card-back, .card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-back{
+    transform: rotateY(180deg);
+}
+
+.card-front {
+
+}
+
+.card {
+    background-color: transparent;
+    height: 8rem;
+    perspective: 100rem;
+}
+

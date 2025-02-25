@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./Search.css";
 
 function DebouncedSearchBar({ stateChanger }) {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useRef(searchTerm); // Use ref for debounced term
-  const [options, setOptions] = useState(["a", "b", "c", "d", "e"]);
+  const [options, setOptions] = useState([]);
 
   const [setData, setApp_id] = stateChanger;
 
@@ -66,35 +67,49 @@ function DebouncedSearchBar({ stateChanger }) {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
-      {/* /* <input
+      <div className="Parent">
+        <input
+          type="text"
+          className="SearchBar rounded-xl"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+        {/* /* <input
         className="SearchBar"
         value={inputValue}
         onKeyDown={handleClick}
         onChange={handleChange}
       /> */}
-      <select
-        size={options.length < 5 ? options.length : 5}
-        className="Dropdown"
-        autoFocus
-        // onChange={(event) => handleGetRequest(event.target.value)}
-      >
-        {options.map((option) => (
-          <option
-            key={option.value}
-            value={option.appid}
-            onClick={(event) => handleGetRequest(option.appid)}
+
+        {options.length > 1 ? (
+          <select
+            size={options.length < 5 ? options.length : 5}
+            className="Dropdown"
+            autoFocus
           >
-            {option.name}
+            {options.map((option) => (
+              <option
+                key={option.value}
+                value={option.appid}
+                onClick={(event) => handleGetRequest(option.appid)}
+              >
+                {option.name}
+              </option>
+            ))}
+          </select>
+        ) : options.length == 1 ? (
+          <option
+            className="Single"
+            key={options[0].value}
+            value={options[0].appid}
+            onClick={(event) => handleGetRequest(options[0].appid)}
+          >
+            {options[0].name}
           </option>
-        ))}
-      </select>
+        ) : null}
+      </div>
     </>
   );
 }

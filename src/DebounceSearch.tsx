@@ -11,7 +11,7 @@ function SearchComponent() {
         // Update suggestions based on API response
         setSuggestions(data);
       });
-  }, 300); // Delay in milliseconds
+  }, 100); // Delay in milliseconds
 
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
