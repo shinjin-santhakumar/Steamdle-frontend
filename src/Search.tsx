@@ -8,13 +8,30 @@ function DebouncedSearchBar({ stateChanger }) {
 
   const [setData, setApp_id] = stateChanger;
 
-  useEffect(() => {
-    console.log("options updated: " + options);
-  }, [options]);
+  const [prevInputs, setPrevInputs] = useState([]); // Array to store prevInputs
+
+  // useEffect(() => {
+  //   console.log("options updated: " + options);
+  // }, [options]);
 
   //handles when a game is clicked
   function handleGetRequest(pram) {
-    console.log("fetching game with id: " + pram);
+    //console.log("fetching game with id: " + pram);
+    console.log("prevInputs: " + prevInputs);
+    console.log("pram: " + pram);
+
+    for (const key in prevInputs) {
+      //console.log(`${key}: ${prevInputs[key]}`);
+      if (prevInputs[key] === pram.toString()) {
+        console.log("already in prevInputs");
+        setSearchTerm("");
+        setOptions([]);
+        return null;
+      }
+    }
+
+    setPrevInputs([...prevInputs, pram.toString()]);
+
     setApp_id(pram);
     fetch("http://127.0.0.1:5000/get_game/" + pram.toString(), {
       method: "GET",
@@ -29,7 +46,7 @@ function DebouncedSearchBar({ stateChanger }) {
   //handles typing in the search bar
   const handleSearch = (searchTerm) => {
     // Perform search logic here, e.g., filter data
-    console.log("Searching for:", searchTerm);
+    // console.log("Searching for:", searchTerm);
     fetch("http://127.0.0.1:5000/search/" + searchTerm, {
       method: "GET",
     })
@@ -54,13 +71,6 @@ function DebouncedSearchBar({ stateChanger }) {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      console.log(
-        "pressed enter: looking for " +
-          options[0].name +
-          " with id " +
-          options[0].appid
-      );
-
       handleGetRequest(options[0].appid);
     }
   };
@@ -77,12 +87,6 @@ function DebouncedSearchBar({ stateChanger }) {
           onKeyDown={handleKeyDown}
           autoFocus
         />
-        {/* /* <input
-        className="SearchBar"
-        value={inputValue}
-        onKeyDown={handleClick}
-        onChange={handleChange}
-      /> */}
 
         {searchTerm && options.length > 1 ? (
           <select

@@ -86,10 +86,6 @@ img.center {
     transform: rotateY(180deg);
 }
 
-.card-front {
-
-}
-
 .card {
     background-color: transparent;
     height: 8rem;
