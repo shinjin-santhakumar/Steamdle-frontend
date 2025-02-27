@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <img className="logo" src={steamdlelogo} />
       <Hint rowLen={rowList.length} />
-
+      {/* <></> */}
       <SearchBar stateChanger={[setData, setApp_id]} />
       <header className="App-header">{rowList}</header>
     </div>

@@ -45,9 +45,10 @@ ul {
 }
 
 .row {
-    margin-left: 30rem;
+    
+    margin-left: 15%;
+    margin-right: 15%;
     margin-top: 1rem;
-    margin-right: 30rem;
     background-color: #313236;
 }
 
@@ -65,7 +66,7 @@ img.center {
 .card-holder {
 
     height: 100%;
-    margin: auto;
+    margin: 0;
     transition: transform 0.6s;
     transform-style: preserve-3d;
 
@@ -77,6 +78,8 @@ img.center {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    white-space: normal;
+    overflow: hidden;
 }
 
 .card-back{

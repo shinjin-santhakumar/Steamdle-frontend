@@ -15,13 +15,32 @@ function Card({ animationDelay, color, cardInfo, type }) {
     }
   }
 
-  const textColor = color != "green" ? "red" : "green";
-  const borderColor = color != "green" ? "border-red-500" : "border-green-500";
+  let textColor = "text-black";
+
+  let borderColor;
+
+  let backgroundColor;
+
+  if (color != "green") {
+    //textColor = "text-red-500";
+    borderColor = "border-red-500";
+    backgroundColor = "bg-red-950";
+  } else {
+    //textColor = "text-green-500";
+    borderColor = "border-green-500";
+    backgroundColor = "bg-green-950";
+  }
+
+  if (color == "yellow") {
+    //textColor = "text-yellow-500";
+    borderColor = "border-yellow-500";
+    backgroundColor = "bg-yellow-600";
+  }
 
   return (
-    <div className={`card p-2 border-2 rounded-xl border-solid ${borderColor}`}>
+    <div className={`card border-2 rounded-xl border-solid ${borderColor} `}>
       <div
-        className="card-holder animation "
+        className={`card-holder animation rounded-xl  ${backgroundColor}`}
         style={
           {
             "--lenthAnimation":
@@ -40,8 +59,8 @@ function Card({ animationDelay, color, cardInfo, type }) {
         ) : null}
 
         {type == "release_date" ? (
-          <div className="card-back text-4xl">
-            {cardInfo == "N/A" ? "N/A" : cardInfo.date.slice(-4)}
+          <div className="card-back text-4xl rounded-xl pt-2">
+            {color == "N/A" ? "N/A" : cardInfo.date.slice(-4)}
 
             <img className="center" src={color == "lower" ? down : null} />
             <img className="center" src={color == "higher" ? up : null} />
@@ -49,15 +68,13 @@ function Card({ animationDelay, color, cardInfo, type }) {
         ) : null}
 
         {type == "developers" ? (
-          <div className="card-back text-2xl">
-            {cardInfo == undefined
-              ? "N/A"
-              : cardInfo.map((temp) => temp).join(", ")}
+          <div className="card-back text-2xl rounded-xl pt-2">
+            {color == "N/A" ? "N/A" : cardInfo.map((temp) => temp).join(", ")}
           </div>
         ) : null}
 
         {type == "price" ? (
-          <div className="card-back text-4xl">
+          <div className="card-back text-4xl rounded-xl pt-2">
             {cardInfo}
             <img className="center" src={color == "lower" ? down : null} />
             <img className="center" src={color == "higher" ? up : null} />
@@ -65,15 +82,15 @@ function Card({ animationDelay, color, cardInfo, type }) {
         ) : null}
 
         {type == "genres" ? (
-          <div className="card-back text-2xl">
-            {cardInfo == undefined
+          <div className="card-back text-2xl rounded-xl pt-2">
+            {cardInfo == "N/A"
               ? "N/A"
               : cardInfo.map((temp) => temp.description).join(", ")}
           </div>
         ) : null}
 
         {type == "reviews" ? (
-          <div className="card-back text-2xl">{cardInfo}</div>
+          <div className="card-back text-2xl rounded-xl pt-2">{cardInfo}</div>
         ) : null}
 
         <img src={steamdlelogo} className="card-front" />

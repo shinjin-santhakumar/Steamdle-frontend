@@ -26,16 +26,29 @@ select {
 }
 
 .Single {
-    width: 10rem;
+    width: 20rem;
     overflow-y: auto;
     scrollbar-width: none;
-    position: relative;
-    /* transform: translate(-50%, 0%); */
-    margin: auto;
-    color : rgb(216, 191, 108);
+    position: absolute;
+    transform: translate(-50%, 0%);
+    margin-left: 50%;
     z-index: 10;
+    color : rgb(216, 191, 108);
+    
 }
 
 .single:hover {
     background-color : rgb(156, 198, 253);
+}
+
+.Dropdown {
+    color : rgb(216, 191, 108);
+  }
+  
+option {
+background : rgb(0, 0, 0);
+}
+
+option:hover {
+    background-color : rgb(33, 37, 43);
 }

@@ -20,21 +20,32 @@ function Hint(props) {
     setShowButton(false);
   };
 
+  useEffect(() => {
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
   console.log("len " + props.rowLen);
 
   return (
-    <div>
+    <div className="mb-4">
       {props.rowLen > 3 &&
         (showButton ? (
-          <button onClick={handleClick}>Play Trailer</button>
-        ) : (
-          <video
-            className="video"
-            width="500"
-            height="300"
-            autoplay="autoplay"
-            muted
+          <button
+            className="bg-slate-800 rounded-xl p-3 hover:bg-slate-700"
+            onClick={handleClick}
           >
+            Play Trailer
+          </button>
+        ) : (
+          <video className="video" width="500" height="300" autoPlay muted loop>
             <source src={movie} type="video/mp4" />
           </video>
         ))}

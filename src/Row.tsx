@@ -32,15 +32,13 @@ function Row(props) {
       "$" + temp.slice(0, temp.length - 2) + "." + temp.slice(temp.length - 2);
   } else price = "N/A";
 
-  const cardInfo = { date: game.release_date, price: price };
-
   return (
     <div className="row rounded-xl">
       <>
         <div className="border-[#313236] rounded-xl border-6 grid grid-cols-6 gap-4">
           <Card
             animationDelay={0.5}
-            color={answers["victory"]}
+            color={answers["victory"] ? "green" : "red"}
             cardInfo={game.header_image}
             type="image"
           />

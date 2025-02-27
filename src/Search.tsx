@@ -70,11 +70,12 @@ function DebouncedSearchBar({ stateChanger }) {
       <div className="Parent">
         <input
           type="text"
-          className="SearchBar rounded-xl"
+          className="SearchBar rounded-xl text-xl"
           placeholder="Search..."
           value={searchTerm}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          autoFocus
         />
         {/* /* <input
         className="SearchBar"
@@ -83,25 +84,25 @@ function DebouncedSearchBar({ stateChanger }) {
         onChange={handleChange}
       /> */}
 
-        {options.length > 1 ? (
+        {searchTerm && options.length > 1 ? (
           <select
             size={options.length < 5 ? options.length : 5}
-            className="Dropdown"
-            autoFocus
+            className="Dropdown rounded-xl"
           >
             {options.map((option) => (
               <option
                 key={option.value}
                 value={option.appid}
                 onClick={(event) => handleGetRequest(option.appid)}
+                className="text-center h-10 text-xl pt-2"
               >
                 {option.name}
               </option>
             ))}
           </select>
-        ) : options.length == 1 ? (
+        ) : searchTerm && options.length == 1 ? (
           <option
-            className="Single"
+            className="Single text-center h-10 text-xl pt-2 rounded-xl"
             key={options[0].value}
             value={options[0].appid}
             onClick={(event) => handleGetRequest(options[0].appid)}
