@@ -2,17 +2,10 @@ import { useState, useEffect } from "react";
 import "./Hint.css";
 
 function Hint(props) {
+  const local = "http://127.0.0.1:5000";
+  const server = "https://shinjinsos.pythonanywhere.com";
+
   const [movie, setMovie] = useState(null);
-
-  fetch("http://127.0.0.1:5000/getHint", {
-    method: "GET",
-  })
-    .then((response) => response.text())
-    .then((data) => setMovie(data));
-
-  useEffect(() => {
-    console.log("movie updated: " + movie);
-  }, [movie]);
 
   const [showButton, setShowButton] = useState(true);
 
@@ -21,6 +14,12 @@ function Hint(props) {
   };
 
   useEffect(() => {
+    fetch(local + "/getHint", {
+      method: "GET",
+    })
+      .then((response) => response.text())
+      .then((data) => setMovie(data));
+
     const handleContextMenu = (event) => {
       event.preventDefault();
     };
@@ -32,7 +31,7 @@ function Hint(props) {
     };
   }, []);
 
-  console.log("len " + props.rowLen);
+  //console.log("len " + props.rowLen);
 
   return (
     <div className="mb-4">

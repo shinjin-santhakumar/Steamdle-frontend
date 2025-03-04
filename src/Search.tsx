@@ -15,10 +15,13 @@ function DebouncedSearchBar({ stateChanger }) {
   // }, [options]);
 
   //handles when a game is clicked
+
+  const local = "http://127.0.0.1:5000";
+  const server = "https://shinjinsos.pythonanywhere.com";
   function handleGetRequest(pram) {
     //console.log("fetching game with id: " + pram);
-    console.log("prevInputs: " + prevInputs);
-    console.log("pram: " + pram);
+    // console.log("prevInputs: " + prevInputs);
+    // console.log("pram: " + pram);
 
     for (const key in prevInputs) {
       //console.log(`${key}: ${prevInputs[key]}`);
@@ -33,7 +36,7 @@ function DebouncedSearchBar({ stateChanger }) {
     setPrevInputs([...prevInputs, pram.toString()]);
 
     setApp_id(pram);
-    fetch("http://127.0.0.1:5000/get_game/" + pram.toString(), {
+    fetch(local + "/get_game/" + pram.toString(), {
       method: "GET",
     })
       .then((response) => response.json())
@@ -47,7 +50,7 @@ function DebouncedSearchBar({ stateChanger }) {
   const handleSearch = (searchTerm) => {
     // Perform search logic here, e.g., filter data
     // console.log("Searching for:", searchTerm);
-    fetch("http://127.0.0.1:5000/search/" + searchTerm, {
+    fetch(local + "/search/" + searchTerm, {
       method: "GET",
     })
       .then((response) => response.json())

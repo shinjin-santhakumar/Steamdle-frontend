@@ -1,0 +1,32 @@
+.victory {
+    position: absolute;
+    height: 120%;
+    width: 100%;
+    z-index: 10;
+    transform: translateY(-25%);
+    background-color: rgba(0, 0, 0,0.5);
+}
+
+.victory-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50rem;
+    height: 50rem;    
+    background-color: #1B2838;
+    animation: move 1s forwards;
+}
+
+.text-body {
+    margin: 3rem;
+}
+
+
+@keyframes move {
+    from {
+        transform: translate(-50%, -150%);
+    }
+    to {
+        transform: translate(-50%, -50%);
+    }
+}

@@ -1,5 +1,5 @@
 .video {
     margin: 0 auto;
-    filter: blur(1rem);
+    filter: blur(.5rem);
 
 }
