@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./Hint.css";
+import "./hint.css";
 import { ComponentProps } from "react";
 
 function Hint(props: ComponentProps<any>) {
