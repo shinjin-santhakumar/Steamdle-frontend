@@ -7,6 +7,8 @@ import SearchBar from "./Search.tsx";
 import steamdlelogo from "./assets/steamdlelogo.png";
 import Victory from "./Victory.tsx";
 import Achievements from "./Achievements.tsx";
+import Banner from "./Banner.tsx";
+import DescriptionHint from "./DescriptionHint.tsx";
 
 function App() {
   const [data, setData] = useState(null);
@@ -24,10 +26,12 @@ function App() {
   return (
     <div className="App">
       <img className="logo" src={steamdlelogo} />
+      <Achievements rowLen={rowList.length} />
       <Hint rowLen={rowList.length} />
-      <Achievements />
+      <DescriptionHint rowLen={rowList.length} />
       {gameOver && !closed && <Victory stateChanger={setClosed} />}
       {!gameOver && <SearchBar stateChanger={[setData, setApp_id]} />}
+      <Banner />
       <header className="App-header">{rowList}</header>
     </div>
   );

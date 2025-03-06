@@ -7,9 +7,10 @@ function Victory(props) {
   const server = "https://shinjinsos.pythonanywhere.com";
 
   const [timeUntilNextDay, setTimeUntilNextDay] = useState(null);
+  const [scrollableHeight, setScrollableHeight] = useState(0);
 
   useEffect(() => {
-    fetch(local + "/getTimeUntilNextDay", {
+    fetch(server + "/getTimeUntilNextDay", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -26,15 +27,38 @@ function Victory(props) {
     console.log("clicked");
     props.stateChanger(true);
   };
+
+  useEffect(() => {
+    const calculateScrollableHeight = () => {
+      // Ensure document.body exists before accessing offsetHeight
+      if (document.body) {
+        setScrollableHeight(document.body.offsetHeight - window.innerHeight);
+      }
+    };
+
+    // Calculate initially and on window resize
+    calculateScrollableHeight();
+    window.addEventListener("resize", calculateScrollableHeight);
+
+    // Clean up the event listener
+    return () =>
+      window.removeEventListener("resize", calculateScrollableHeight);
+  }, []);
+
   return (
-    <div className="victory ">
+    <div className="victory">
       <div className="victory-body text-red-500 rounded-xl text-7xl font-mono p-10">
-        <button className="bg-white" onClick={handleClick}>
-          {" "}
-          Close{" "}
+        <button
+          className="closing-button bg-stone-950 hover:bg-stone-900 rounded-xl text-3xl cursor-pointer text-gray-100"
+          onClick={handleClick}
+        >
+          X
         </button>
-        <div>Congrats you got the game!</div>
-        <div className="text-body"> The next day will be available in </div>
+        <div className="text-white">Congrats you got the game!</div>
+        <div className="text-body text-white">
+          {" "}
+          The next day will be available in{" "}
+        </div>
         {timeUntilNextDay != null && (
           <CountdownTimer initialTime={timeUntilNextDay} />
         )}

@@ -1,10 +1,18 @@
 .victory {
-    position: absolute;
-    height: 120%;
+    /* position: absolute;
+    height: 100%;
     width: 100%;
     z-index: 10;
     transform: translateY(-25%);
-    background-color: rgba(0, 0, 0,0.5);
+    background-color: rgba(0, 0, 0,0.5); */
+
+    position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
 }
 
 .victory-body {
@@ -29,4 +37,12 @@
     to {
         transform: translate(-50%, -50%);
     }
+}
+
+.closing-button {
+    position: relative;
+    left: 50%;
+    top: -3rem;
+    width: 3rem;
+    height: 3rem;
 }

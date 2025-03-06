@@ -36,7 +36,7 @@ function DebouncedSearchBar({ stateChanger }) {
     setPrevInputs([...prevInputs, pram.toString()]);
 
     setApp_id(pram);
-    fetch(local + "/get_game/" + pram.toString(), {
+    fetch(server + "/get_game/" + pram.toString(), {
       method: "GET",
     })
       .then((response) => response.json())
@@ -50,7 +50,7 @@ function DebouncedSearchBar({ stateChanger }) {
   const handleSearch = (searchTerm) => {
     // Perform search logic here, e.g., filter data
     // console.log("Searching for:", searchTerm);
-    fetch(local + "/search/" + searchTerm, {
+    fetch(server + "/search/" + searchTerm, {
       method: "GET",
     })
       .then((response) => response.json())

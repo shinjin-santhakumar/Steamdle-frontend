@@ -33,9 +33,9 @@ function Row(props) {
   } else price = "N/A";
 
   return (
-    <div className="row rounded-xl">
-      <>
-        <div className="border-[#313236] rounded-xl border-6 grid grid-cols-6 gap-4">
+    <div className="row-container">
+      <div className="row rounded-xl">
+        <div className="border-[#313236] rounded-xl border-6 grid grid-cols-6 gap-4 xs:gap-40">
           <Card
             animationDelay={0.5}
             color={answers["victory"] ? "green" : "red"}
@@ -80,7 +80,7 @@ function Row(props) {
             type="reviews"
           />
         </div>
-      </>
+      </div>
     </div>
   );
 }

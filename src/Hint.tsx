@@ -14,7 +14,7 @@ function Hint(props) {
   };
 
   useEffect(() => {
-    fetch(local + "/getHint", {
+    fetch(server + "/getHint", {
       method: "GET",
     })
       .then((response) => response.text())
@@ -34,21 +34,38 @@ function Hint(props) {
   //console.log("len " + props.rowLen);
 
   return (
-    <div className="mb-4">
-      {props.rowLen > 3 &&
-        (showButton ? (
-          <button
-            className="bg-slate-800 rounded-xl p-3 hover:bg-slate-700"
-            onClick={handleClick}
-          >
-            Play Trailer
-          </button>
-        ) : (
-          <video className="video" width="500" height="300" autoPlay muted loop>
-            <source src={movie} type="video/mp4" />
-          </video>
-        ))}
-    </div>
+    <>
+      {props.rowLen > 0 ? (
+        <div className="mb-2">
+          {showButton ? (
+            <button
+              className={
+                props.rowLen < 2
+                  ? `bg-slate-400 rounded-xl p-3 cursor-not-allowed`
+                  : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
+              }
+              onClick={handleClick}
+              disabled={props.rowLen < 2}
+            >
+              Play Trailer ({props.rowLen > 2 ? 2 : props.rowLen} / 2)
+            </button>
+          ) : (
+            <video
+              className="video"
+              width="500"
+              height="300"
+              autoPlay
+              muted
+              loop
+            >
+              <source src={movie} type="video/mp4" />
+            </video>
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 

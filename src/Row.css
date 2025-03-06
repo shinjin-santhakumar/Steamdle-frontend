@@ -44,12 +44,14 @@ ul {
     height: 100%;
 }
 
+
 .row {
     
     margin-left: 15%;
     margin-right: 15%;
     margin-top: 1rem;
     background-color: #313236;
+    overflow-x: auto;
 }
 
 .ele {
@@ -90,5 +92,9 @@ img.center {
     background-color: transparent;
     height: 8rem;
     perspective: 100rem;
+    min-width: 10rem;
 }
 
+.rowContainer {
+    overflow-x: auto;
+}
