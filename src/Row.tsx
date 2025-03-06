@@ -1,5 +1,4 @@
 import "./Row.css";
-import "./Card.tsx";
 import Card from "./Card.tsx";
 
 import { ComponentProps } from "react";

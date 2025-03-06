@@ -1,4 +1,4 @@
-import "./victory.css";
+import "./Victory.css";
 import { useEffect, useState } from "react";
 import CountdownTimer from "./CountdownTimer";
 import { ComponentProps } from "react";
