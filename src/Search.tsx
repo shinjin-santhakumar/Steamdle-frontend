@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Search.css";
 
-function DebouncedSearchBar({ stateChanger }) {
+interface options {
+  appid: number;
+  name: string;
+  value: string;
+}
+
+type StateChanger = [(data: any) => void, (app_id: any) => void];
+
+function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useRef(searchTerm); // Use ref for debounced term
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<options[]>([]);
 
   const [setData, setApp_id] = stateChanger;
 
-  const [prevInputs, setPrevInputs] = useState([]); // Array to store prevInputs
+  const [prevInputs, setPrevInputs] = useState<string[]>([]); // Array to store prevInputs
 
   // useEffect(() => {
   //   console.log("options updated: " + options);
@@ -16,9 +24,9 @@ function DebouncedSearchBar({ stateChanger }) {
 
   //handles when a game is clicked
 
-  const local = "http://127.0.0.1:5000";
+  //const local = "http://127.0.0.1:5000";
   const server = "https://shinjinsos.pythonanywhere.com";
-  function handleGetRequest(pram) {
+  function handleGetRequest(pram: number) {
     //console.log("fetching game with id: " + pram);
     // console.log("prevInputs: " + prevInputs);
     // console.log("pram: " + pram);
@@ -47,7 +55,7 @@ function DebouncedSearchBar({ stateChanger }) {
   }
 
   //handles typing in the search bar
-  const handleSearch = (searchTerm) => {
+  const handleSearch = (searchTerm: string) => {
     // Perform search logic here, e.g., filter data
     // console.log("Searching for:", searchTerm);
     fetch(server + "/search/" + searchTerm, {
@@ -68,11 +76,11 @@ function DebouncedSearchBar({ stateChanger }) {
     return () => clearTimeout(timeoutId);
   }, [searchTerm]); // Add onSearch to the dependency array
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       handleGetRequest(options[0].appid);
     }
@@ -100,7 +108,7 @@ function DebouncedSearchBar({ stateChanger }) {
               <option
                 key={option.value}
                 value={option.appid}
-                onClick={(event) => handleGetRequest(option.appid)}
+                onClick={() => handleGetRequest(option.appid)}
                 className="text-center h-10 text-xl pt-2"
               >
                 {option.name}
@@ -112,7 +120,7 @@ function DebouncedSearchBar({ stateChanger }) {
             className="Single text-center h-10 text-xl pt-2 rounded-xl"
             key={options[0].value}
             value={options[0].appid}
-            onClick={(event) => handleGetRequest(options[0].appid)}
+            onClick={() => handleGetRequest(options[0].appid)}
           >
             {options[0].name}
           </option>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Row from "./Row.tsx";
 import { useMemo } from "react";
 import Hint from "./Hint.tsx";
@@ -10,10 +10,16 @@ import Achievements from "./Achievements.tsx";
 import Banner from "./Banner.tsx";
 import DescriptionHint from "./DescriptionHint.tsx";
 
+interface data {
+  colors: { [key: string]: boolean };
+}
+
+type rows = JSX.Element[];
+
 function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<data>();
   const [app_id, setApp_id] = useState(null);
-  const [rowList, setRowList] = useState([]);
+  const [rowList, setRowList] = useState<rows>([]);
   const [gameOver, setGameOver] = useState(false);
   const [closed, setClosed] = useState(false);
 

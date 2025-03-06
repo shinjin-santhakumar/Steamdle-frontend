@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import "./Achievements.css";
+import { ComponentProps } from "react";
 
-function Achievements(props) {
+interface props {
+  rowLen: number;
+}
+
+function Achievements(props: props) {
   const [Achievements, setAchievements] = useState([]);
-  const [currImg, setCurrImg] = useState(null);
+  const [currImg, setCurrImg] = useState<ComponentProps<any>>(null);
   const [currIndex, setCurrIndex] = useState(0);
   const [showButton, setShowButton] = useState(true);
 
-  const local = "http://127.0.0.1:5000";
+  //const local = "http://127.0.0.1:5000";
   const server = "https://shinjinsos.pythonanywhere.com";
 
   useEffect(() => {

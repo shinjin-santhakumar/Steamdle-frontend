@@ -1,13 +1,13 @@
 import "./victory.css";
 import { useEffect, useState } from "react";
 import CountdownTimer from "./CountdownTimer";
+import { ComponentProps } from "react";
 
-function Victory(props) {
-  const local = "http://127.0.0.1:5000";
+function Victory(props: ComponentProps<any>) {
+  //const local = "http://127.0.0.1:5000";
   const server = "https://shinjinsos.pythonanywhere.com";
 
-  const [timeUntilNextDay, setTimeUntilNextDay] = useState(null);
-  const [scrollableHeight, setScrollableHeight] = useState(0);
+  const [timeUntilNextDay, setTimeUntilNextDay] = useState<number>();
 
   useEffect(() => {
     fetch(server + "/getTimeUntilNextDay", {
@@ -27,23 +27,6 @@ function Victory(props) {
     console.log("clicked");
     props.stateChanger(true);
   };
-
-  useEffect(() => {
-    const calculateScrollableHeight = () => {
-      // Ensure document.body exists before accessing offsetHeight
-      if (document.body) {
-        setScrollableHeight(document.body.offsetHeight - window.innerHeight);
-      }
-    };
-
-    // Calculate initially and on window resize
-    calculateScrollableHeight();
-    window.addEventListener("resize", calculateScrollableHeight);
-
-    // Clean up the event listener
-    return () =>
-      window.removeEventListener("resize", calculateScrollableHeight);
-  }, []);
 
   return (
     <div className="victory">

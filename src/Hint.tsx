@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import "./Hint.css";
+import { ComponentProps } from "react";
 
-function Hint(props) {
-  const local = "http://127.0.0.1:5000";
+function Hint(props: ComponentProps<any>) {
+  //const local = "http://127.0.0.1:5000";
   const server = "https://shinjinsos.pythonanywhere.com";
 
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState<string>("");
 
   const [showButton, setShowButton] = useState(true);
 
@@ -20,7 +21,7 @@ function Hint(props) {
       .then((response) => response.text())
       .then((data) => setMovie(data));
 
-    const handleContextMenu = (event) => {
+    const handleContextMenu = (event: MouseEvent) => {
       event.preventDefault();
     };
 

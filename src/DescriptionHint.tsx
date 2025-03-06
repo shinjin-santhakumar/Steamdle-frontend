@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { ComponentProps } from "react";
 
-function DescriptionHint(props) {
-  const [DescriptionHint, setDescriptionHint] = useState(null);
-  const [showButton, setShowButton] = useState(true);
+function DescriptionHint(props: ComponentProps<any>) {
+  const [DescriptionHint, setDescriptionHint] = useState<string>();
+  const [showButton, setShowButton] = useState<boolean>(true);
 
-  const local = "http://127.0.0.1:5000";
+  //const local = "http://127.0.0.1:5000";
   const server = "https://shinjinsos.pythonanywhere.com";
 
   useEffect(() => {

@@ -1,18 +1,10 @@
 import "./Row.css";
-import up from "./assets/up.png";
-import down from "./assets/down.png";
-import steamdlelogo from "./assets/steamdlelogo.png";
 import "./Card.tsx";
 import Card from "./Card.tsx";
 
-interface RowStyle {
-  "--lenthAnimation": string;
-}
+import { ComponentProps } from "react";
 
-let lenthAnimation: string = "s";
-let startAnimation: number = 0;
-
-function Row(props) {
+function Row(props: ComponentProps<any>) {
   //let game = ; //props[10].json(); //new Map(Object.entries(data));
   //console.log();
 
