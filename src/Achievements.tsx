@@ -53,7 +53,7 @@ function Achievements(props: props) {
           showButton ? (
             <button
               className={
-                props.rowLen < 1
+                props.rowLen < 2
                   ? `bg-slate-400 rounded-xl p-3 cursor-not-allowed`
                   : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
               }

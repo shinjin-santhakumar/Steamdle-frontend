@@ -46,7 +46,7 @@ function Hint(props: ComponentProps<any>) {
     <>
       {noVideo ? (
         <div> No Trailer </div>
-      ) : props.rowLen > 0 ? (
+      ) : props.rowLen > 2 ? (
         <div className="mb-2">
           {showButton ? (
             <button
