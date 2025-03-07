@@ -58,9 +58,9 @@ function Achievements(props: props) {
                   : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
               }
               onClick={handleClick}
-              disabled={props.rowLen < 1}
+              disabled={props.rowLen < 2}
             >
-              Show Achievements ({props.rowLen > 1 ? 1 : props.rowLen} / 1)
+              Show Achievements ({props.rowLen > 2 ? 2 : props.rowLen} / 2)
             </button>
           ) : (
             <>

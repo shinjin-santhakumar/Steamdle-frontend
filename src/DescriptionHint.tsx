@@ -27,14 +27,14 @@ function DescriptionHint(props: ComponentProps<any>) {
           {showButton ? (
             <button
               className={
-                props.rowLen < 1
+                props.rowLen < 6
                   ? `bg-slate-400 rounded-xl p-3 cursor-not-allowed`
                   : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
               }
               onClick={() => setShowButton(false)}
-              disabled={props.rowLen < 3}
+              disabled={props.rowLen < 6}
             >
-              Show Description ({props.rowLen > 3 ? 3 : props.rowLen} / 3)
+              Show Description ({props.rowLen > 6 ? 6 : props.rowLen} / 6)
             </button>
           ) : (
             <div>{DescriptionHint != null && DescriptionHint}</div>

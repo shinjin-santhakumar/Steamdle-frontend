@@ -51,14 +51,14 @@ function Hint(props: ComponentProps<any>) {
           {showButton ? (
             <button
               className={
-                props.rowLen < 2
+                props.rowLen < 4
                   ? `bg-slate-400 rounded-xl p-3 cursor-not-allowed`
                   : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
               }
               onClick={handleClick}
-              disabled={props.rowLen < 2}
+              disabled={props.rowLen < 4}
             >
-              Play Trailer ({props.rowLen > 2 ? 2 : props.rowLen} / 2)
+              Play Trailer ({props.rowLen > 4 ? 4 : props.rowLen} / 4)
             </button>
           ) : (
             <video
