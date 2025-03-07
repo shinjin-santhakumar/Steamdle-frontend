@@ -10,6 +10,8 @@ function Hint(props: ComponentProps<any>) {
 
   const [showButton, setShowButton] = useState(true);
 
+  const [noVideo, setNoVideo] = useState(false);
+
   const handleClick = () => {
     setShowButton(false);
   };
@@ -32,11 +34,19 @@ function Hint(props: ComponentProps<any>) {
     };
   }, []);
 
+  useEffect(() => {
+    if (movie == "No video") {
+      setNoVideo(true);
+    }
+  }, [movie]);
+
   //console.log("len " + props.rowLen);
 
   return (
     <>
-      {props.rowLen > 0 ? (
+      {noVideo ? (
+        <div> No Trailer </div>
+      ) : props.rowLen > 0 ? (
         <div className="mb-2">
           {showButton ? (
             <button

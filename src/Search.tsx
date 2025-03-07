@@ -18,6 +18,19 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
 
   const [prevInputs, setPrevInputs] = useState<string[]>([]); // Array to store prevInputs
 
+  useEffect(() => {
+    let cacheInputs = localStorage.getItem("prevInputs");
+    console.log("cacheInputs: " + cacheInputs);
+    if (cacheInputs) {
+      setPrevInputs(JSON.parse(cacheInputs));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("prevInputs", JSON.stringify(prevInputs));
+    console.log("prevInputs updated: " + prevInputs);
+  }, [prevInputs]);
+
   // useEffect(() => {
   //   console.log("options updated: " + options);
   // }, [options]);
