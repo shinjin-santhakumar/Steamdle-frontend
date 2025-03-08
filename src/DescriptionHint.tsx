@@ -22,7 +22,7 @@ function DescriptionHint(props: ComponentProps<any>) {
 
   return (
     <>
-      {props.rowLen > 2 ? (
+      {props.rowLen > 4 ? (
         <div className="mb-2">
           {showButton ? (
             <button

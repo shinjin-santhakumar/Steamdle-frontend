@@ -97,6 +97,27 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
     if (event.key === "Enter") {
       handleGetRequest(options[0].appid);
     }
+
+    if (event.key === "ArrowDown") {
+      console.log("arrow down");
+      if (options.length > 1) {
+        document.getElementById("select")!.focus();
+      }
+
+      if (options.length == 1) {
+        document.getElementById("select")!;
+      }
+    }
+  };
+
+  const handleSelect = (event: React.KeyboardEvent<HTMLSelectElement>) => {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedIndex = selectElement.selectedIndex;
+    const selectedOption = selectElement.options[selectedIndex];
+
+    if (event.key === "Enter") {
+      handleGetRequest(parseInt(selectedOption.value));
+    }
   };
 
   return (
@@ -104,7 +125,7 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
       <div className="Parent">
         <input
           type="text"
-          className="SearchBar rounded-xl text-xl"
+          className="SearchBar rounded-xl text-xl f"
           placeholder="Search..."
           value={searchTerm}
           onChange={handleChange}
@@ -114,8 +135,10 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
 
         {searchTerm && options.length > 1 ? (
           <select
+            id="select"
             size={options.length < 5 ? options.length : 5}
-            className="Dropdown rounded-xl"
+            className="Dropdown rounded-xl f"
+            onKeyDown={handleSelect}
           >
             {options.map((option) => (
               <option
@@ -123,6 +146,7 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
                 value={option.appid}
                 onClick={() => handleGetRequest(option.appid)}
                 className="text-center h-10 text-xl pt-2"
+                //(event) => handleSelect(event, option.appid)}
               >
                 {option.name}
               </option>
@@ -130,6 +154,8 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
           </select>
         ) : searchTerm && options.length == 1 ? (
           <option
+            autoFocus
+            id="select"
             className="Single text-center h-10 text-xl pt-2 rounded-xl"
             key={options[0].value}
             value={options[0].appid}
