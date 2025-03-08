@@ -49,57 +49,52 @@ function Achievements(props: props) {
         <img className="achievements" src={achievement.path} />
       ))} */}
       <div className="mb-2">
-        {!noAcheivements ? (
-          showButton ? (
+        {showButton ? (
+          <button
+            className={
+              props.rowLen < 2
+                ? `bg-slate-400 rounded-xl p-3 cursor-not-allowed`
+                : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
+            }
+            onClick={handleClick}
+            disabled={props.rowLen < 2}
+          >
+            Show Achievements ({props.rowLen > 2 ? 2 : props.rowLen} / 2)
+          </button>
+        ) : !noAcheivements ? (
+          <>
             <button
-              className={
-                props.rowLen < 2
-                  ? `bg-slate-400 rounded-xl p-3 cursor-not-allowed`
-                  : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
-              }
-              onClick={handleClick}
-              disabled={props.rowLen < 2}
+              className={`achievements rounded-l-lg ${
+                currIndex == 0 ? "bg-gray-800" : "bg-sky-950 hover:bg-sky-800"
+              }`}
+              onClick={() => {
+                setCurrIndex(currIndex > 0 ? currIndex - 1 : currIndex);
+              }}
             >
-              Show Achievements ({props.rowLen > 2 ? 2 : props.rowLen} / 2)
+              prev
             </button>
-          ) : (
-            <>
-              <button
-                className={`achievements rounded-l-lg ${
-                  currIndex == 0 ? "bg-gray-800" : "bg-sky-950 hover:bg-sky-800"
-                }`}
-                onClick={() => {
-                  setCurrIndex(currIndex > 0 ? currIndex - 1 : currIndex);
-                }}
-              >
-                {" "}
-                prev{" "}
-              </button>
-              <img className="achievements" src={currImg?.path} />
-              <button
-                className={`achievements rounded-r-lg ${
-                  currIndex == Achievements.length - 1
-                    ? "bg-gray-800"
-                    : "bg-sky-950 hover:bg-sky-800"
-                }`}
-                onClick={() => {
-                  setCurrIndex(
-                    currIndex < Achievements.length - 1
-                      ? currIndex + 1
-                      : currIndex
-                  );
-                }}
-              >
-                {" "}
-                next{" "}
-              </button>
-            </>
-          )
+            <img className="achievements" src={currImg?.path} />
+            <button
+              className={`achievements rounded-r-lg ${
+                currIndex == Achievements.length - 1
+                  ? "bg-gray-800"
+                  : "bg-sky-950 hover:bg-sky-800"
+              }`}
+              onClick={() => {
+                setCurrIndex(
+                  currIndex < Achievements.length - 1
+                    ? currIndex + 1
+                    : currIndex
+                );
+              }}
+            >
+              {" "}
+              next{" "}
+            </button>
+          </>
         ) : (
           <div> No Achievements </div>
         )}
-
-        {}
       </div>
     </>
   );

@@ -113,7 +113,9 @@ function App() {
       <Achievements rowLen={rowList.length} />
       <Hint rowLen={rowList.length} />
       <DescriptionHint rowLen={rowList.length} />
-      {gameOver && !closed && <Victory stateChanger={setClosed} />}
+      {gameOver && !closed && (
+        <Victory stateChanger={setClosed} rowLen={rowList.length} />
+      )}
       {!gameOver && <SearchBar stateChanger={[setData, setApp_id]} />}
       <Banner />
       <header className="App-header ">{rowList}</header>
