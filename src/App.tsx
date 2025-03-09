@@ -95,6 +95,7 @@ function App() {
       setGameOver(false);
       setRowList([]);
       localStorage.clear();
+      localStorage.setItem("day", currDay);
     }
   }, [currDay]);
 

@@ -44,16 +44,39 @@ function Victory(props: ComponentProps<any>) {
       if (item !== null) {
         let currData = JSON.parse(item);
         let currItem = currData.data.colors;
-        for (const key in currItem) {
-          console.log(typeof currItem[key]);
-          if (currItem[key] && key !== "victory") {
-            colorArray += `${
-              currItem[key] != "green" && currItem[key] != "yellow"
-                ? copyColors["red"]
-                : copyColors[currItem[key]]
-            }`;
-          }
-        }
+
+        colorArray += `${
+          currItem["release_date"] != "green" &&
+          currItem["release_date"] != "yellow"
+            ? copyColors["red"]
+            : copyColors[currItem["release_date"]]
+        }`;
+
+        colorArray += `${
+          currItem["developers"] != "green" &&
+          currItem["developers"] != "yellow"
+            ? copyColors["red"]
+            : copyColors[currItem["developers"]]
+        }`;
+
+        colorArray += `${
+          currItem["price"] != "green" && currItem["price"] != "yellow"
+            ? copyColors["red"]
+            : copyColors[currItem["price"]]
+        }`;
+
+        colorArray += `${
+          currItem["genres"] != "green" && currItem["genres"] != "yellow"
+            ? copyColors["red"]
+            : copyColors[currItem["genres"]]
+        }`;
+
+        colorArray += `${
+          currItem["reviews"] != "green" && currItem["reviews"] != "yellow"
+            ? copyColors["red"]
+            : copyColors[currItem["reviews"]]
+        }`;
+
         colorArray += "\n";
       }
     }
