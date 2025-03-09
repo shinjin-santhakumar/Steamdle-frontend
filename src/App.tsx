@@ -95,15 +95,6 @@ function App() {
       setGameOver(false);
       setRowList([]);
       localStorage.clear();
-
-      fetch("https://shinjinsos.pythonanywhere.com/getDay", {
-        method: "GET",
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          setCurrDay(data);
-          localStorage.setItem("day", data);
-        });
     }
   }, [currDay]);
 
