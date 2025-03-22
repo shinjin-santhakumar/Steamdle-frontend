@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Search.css";
+import server from "./global.tsx";
 
 interface options {
   appid: number;
@@ -37,8 +38,6 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
 
   //handles when a game is clicked
 
-  //const local = "http://127.0.0.1:5000";
-  const server = "https://shinjinsos.pythonanywhere.com";
   function handleGetRequest(pram: number) {
     //console.log("fetching game with id: " + pram);
     // console.log("prevInputs: " + prevInputs);

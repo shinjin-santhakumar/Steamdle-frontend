@@ -8,20 +8,20 @@ function Row(props: ComponentProps<any>) {
   //console.log();
 
   console.log(props);
-  let game = props.data.data2[props.app_id].data;
+  let game = props.data.info;
   let answers = props.data.colors;
-  console.log(answers);
-
-  let reviewData = props.data.data1;
+  console.log(game.release_date);
 
   let price: string;
 
-  if (game.is_free == true) price = "Free";
-  else if (game.price_overview != null) {
-    let temp = game.price_overview.initial.toString();
+  if (game.price == "Free") price = "Free";
+  else if (game.price == "N/A") price = "N/A";
+  else {
+    let temp: string = `${game.price}`;
+    console.log(typeof temp);
     price =
       "$" + temp.slice(0, temp.length - 2) + "." + temp.slice(temp.length - 2);
-  } else price = "N/A";
+  }
 
   return (
     <div className="row-container">
@@ -65,9 +65,7 @@ function Row(props: ComponentProps<any>) {
           <Card
             animationDelay={3}
             color={answers["reviews"]}
-            cardInfo={
-              reviewData ? reviewData.query_summary.review_score_desc : "N/A"
-            }
+            cardInfo={game.reviews}
             type="reviews"
           />
         </div>

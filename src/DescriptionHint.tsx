@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { ComponentProps } from "react";
+import server from "./global.tsx";
 
 function DescriptionHint(props: ComponentProps<any>) {
   const [DescriptionHint, setDescriptionHint] = useState<string>();
   const [showButton, setShowButton] = useState<boolean>(true);
-
-  //const local = "http://127.0.0.1:5000";
-  const server = "https://shinjinsos.pythonanywhere.com";
 
   useEffect(() => {
     fetch(server + "/getDescription", {

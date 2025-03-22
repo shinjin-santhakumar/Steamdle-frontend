@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import "./hint.css";
 import { ComponentProps } from "react";
+import server from "./global.tsx";
 
 function Hint(props: ComponentProps<any>) {
-  //const local = "http://127.0.0.1:5000";
-  const server = "https://shinjinsos.pythonanywhere.com";
-
   const [movie, setMovie] = useState<string>("");
 
   const [showButton, setShowButton] = useState(true);

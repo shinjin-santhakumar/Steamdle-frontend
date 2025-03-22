@@ -39,33 +39,6 @@ function App() {
   }, [data]);
 
   useEffect(() => {
-    const gameOverCache = localStorage.getItem("gameOver");
-
-    if (gameOverCache == "true") {
-      setGameOver(true);
-    }
-
-    const rowlen = localStorage.getItem("rowlen");
-    let rowLenNum;
-    if (rowlen) {
-      rowLenNum = JSON.parse(rowlen);
-    } else {
-      return;
-    }
-
-    let newArray = [];
-
-    for (let i = 0; i < rowLenNum; i++) {
-      const cachedRow = localStorage.getItem("rowCache" + i);
-      if (cachedRow) {
-        const { data, app_id } = JSON.parse(cachedRow);
-        const row = <Row data={data} app_id={app_id} key={app_id} />;
-        newArray.push(row);
-      }
-    }
-
-    setRowList(newArray ? newArray.reverse() : []);
-
     fetch("https://shinjinsos.pythonanywhere.com/getDay", {
       method: "GET",
     })
@@ -97,6 +70,33 @@ function App() {
       localStorage.clear();
       localStorage.setItem("day", currDay);
     }
+
+    const gameOverCache = localStorage.getItem("gameOver");
+
+    if (gameOverCache == "true") {
+      setGameOver(true);
+    }
+
+    const rowlen = localStorage.getItem("rowlen");
+    let rowLenNum;
+    if (rowlen) {
+      rowLenNum = JSON.parse(rowlen);
+    } else {
+      return;
+    }
+
+    let newArray = [];
+
+    for (let i = 0; i < rowLenNum; i++) {
+      const cachedRow = localStorage.getItem("rowCache" + i);
+      if (cachedRow) {
+        const { data, app_id } = JSON.parse(cachedRow);
+        const row = <Row data={data} app_id={app_id} key={app_id} />;
+        newArray.push(row);
+      }
+    }
+
+    setRowList(newArray ? newArray.reverse() : []);
   }, [currDay]);
 
   return (

@@ -62,7 +62,7 @@ function Card({
 
         {type == "release_date" ? (
           <div className="card-back text-4xl rounded-xl pt-2">
-            {color == "N/A" ? "N/A" : cardInfo.date.slice(-4)}
+            {color == "N/A" ? "N/A" : cardInfo.slice(-4)}
 
             <img className="center" src={color == "lower" ? down : ""} />
             <img className="center" src={color == "higher" ? up : ""} />

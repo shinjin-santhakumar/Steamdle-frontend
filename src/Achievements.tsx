@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Achievements.css";
 import { ComponentProps } from "react";
+import server from "./global.tsx";
 
 interface props {
   rowLen: number;
@@ -12,9 +13,6 @@ function Achievements(props: props) {
   const [currIndex, setCurrIndex] = useState(0);
   const [showButton, setShowButton] = useState(true);
   const [noAcheivements, setNoAcheivements] = useState(false);
-
-  //const local = "http://127.0.0.1:5000";
-  const server = "https://shinjinsos.pythonanywhere.com";
 
   useEffect(() => {
     fetch(server + "/getAchievement", {
