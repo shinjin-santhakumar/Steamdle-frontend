@@ -54,9 +54,37 @@ function App() {
     setRowList(newArray ? newArray.reverse() : []);
   }
 
+  // Fetch the current day when the component mounts
+  useEffect(() => {
+    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
+      method: "GET",
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        setCurrDay(data);
+
+        if (data != localStorage.getItem("day")) {
+          clearGameData();
+          localStorage.clear();
+          localStorage.setItem("day", data);
+        } else {
+          loadGameData();
+        }
+      });
+
+    const gameOverCache = localStorage.getItem("gameOver");
+
+    if (gameOverCache == "true") {
+      setGameOver(true);
+    }
+  }, []);
+
   useMemo(() => {
     if (!data) return <p>Loading...</p>;
-    if (data.colors["victory"]) setGameOver(true);
+    if (data.colors["victory"]) {
+      localStorage.setItem("gameOver", "true");
+      setGameOver(true);
+    }
 
     localStorage.setItem(
       "rowCache" + rowList.length,
@@ -67,47 +95,6 @@ function App() {
 
     setRowList([<Row data={data} app_id={app_id} key={app_id} />, ...rowList]);
   }, [data]);
-
-  // Fetch the current day when the component mounts
-  useEffect(() => {
-    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
-      method: "GET",
-    })
-      .then((response) => response.text())
-      .then((data) => setCurrDay(data));
-
-    const gameOverCache = localStorage.getItem("gameOver");
-
-    if (gameOverCache == "true") {
-      setGameOver(true);
-    }
-  }, []);
-
-  // useEffect(() => {
-  //   if (gameOver) {
-  //     localStorage.setItem("gameOver", "true");
-  //   }
-
-  //   fetch("https://shinjinsos.pythonanywhere.com/getDay", {
-  //     method: "GET",
-  //   })
-  //     .then((response) => response.text())
-  //     .then((data) => {
-  //       setCurrDay(data);
-  //       localStorage.setItem("day", data);
-  //     });
-  // }, [gameOver]);
-
-  useEffect(() => {
-    console.log("checking day" + currDay);
-    if (currDay && currDay != localStorage.getItem("day")) {
-      clearGameData();
-      localStorage.clear();
-      localStorage.setItem("day", currDay);
-    } else {
-      loadGameData();
-    }
-  }, [currDay]);
 
   return (
     <div className="App bg-linear-to-r/srgb from-slate-800 to-slate-950">
