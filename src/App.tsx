@@ -61,14 +61,14 @@ function App() {
     })
       .then((response) => response.text())
       .then((data) => {
-        setCurrDay(data);
-
         if (data != localStorage.getItem("day")) {
           clearGameData();
           localStorage.clear();
           localStorage.setItem("day", data);
+          setCurrDay(data);
         } else {
           loadGameData();
+          setCurrDay(currDay);
         }
       });
 
