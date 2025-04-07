@@ -6,13 +6,13 @@ function DescriptionHint(props: ComponentProps<any>) {
   const [DescriptionHint, setDescriptionHint] = useState<string>();
   const [showButton, setShowButton] = useState<boolean>(true);
 
-  useEffect(() => {
+  function handleClick() {
     fetch(server + "/getDescription", {
       method: "GET",
     })
       .then((response) => response.text())
       .then((data) => setDescriptionHint(data));
-  }, []);
+  }
 
   useEffect(() => {
     console.log("DescriptionHint updated: " + DescriptionHint);
@@ -29,7 +29,10 @@ function DescriptionHint(props: ComponentProps<any>) {
                   ? `bg-slate-400 rounded-xl p-3 cursor-not-allowed`
                   : `bg-slate-800 rounded-xl p-3 hover:bg-slate-700`
               }
-              onClick={() => setShowButton(false)}
+              onClick={() => {
+                setShowButton(false);
+                handleClick();
+              }}
               disabled={props.rowLen < 6}
             >
               Show Description ({props.rowLen > 6 ? 6 : props.rowLen} / 6)

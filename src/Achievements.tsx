@@ -15,20 +15,11 @@ function Achievements(props: props) {
   const [noAcheivements, setNoAcheivements] = useState(false);
 
   useEffect(() => {
-    fetch(server + "/getAchievement", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => setAchievements(data));
-  }, []);
-
-  useEffect(() => {
     console.log("Achievements updated: " + Achievements);
 
     if (typeof Achievements == "string") {
       setNoAcheivements(true);
-    }
-    if (Achievements.length > 0) {
+    } else if (Achievements.length > 0) {
       setCurrImg(Achievements[currIndex]);
     }
   }, [Achievements]);
@@ -38,14 +29,16 @@ function Achievements(props: props) {
   }, [currIndex]);
 
   const handleClick = () => {
+    fetch(server + "/getAchievement", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => setAchievements(data));
     setShowButton(false);
   };
 
   return (
     <>
-      {/* {Achievements.map((achievement, index) => (
-        <img className="achievements" src={achievement.path} />
-      ))} */}
       <div className="mb-2">
         {showButton ? (
           <button
@@ -71,7 +64,11 @@ function Achievements(props: props) {
             >
               prev
             </button>
-            <img className="achievements" src={currImg?.path} />
+            <img
+              className="achievements"
+              src={currImg?.path}
+              alt="achievement"
+            />
             <button
               className={`achievements rounded-r-lg ${
                 currIndex == Achievements.length - 1

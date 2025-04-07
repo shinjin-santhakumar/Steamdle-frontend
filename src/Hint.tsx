@@ -11,16 +11,16 @@ function Hint(props: ComponentProps<any>) {
   const [noVideo, setNoVideo] = useState(false);
 
   const handleClick = () => {
-    setShowButton(false);
-  };
-
-  useEffect(() => {
     fetch(server + "/getHint", {
       method: "GET",
     })
       .then((response) => response.text())
       .then((data) => setMovie(data));
 
+    setShowButton(false);
+  };
+
+  useEffect(() => {
     const handleContextMenu = (event: MouseEvent) => {
       event.preventDefault();
     };
@@ -37,8 +37,6 @@ function Hint(props: ComponentProps<any>) {
       setNoVideo(true);
     }
   }, [movie]);
-
-  //console.log("len " + props.rowLen);
 
   return (
     <>
@@ -60,6 +58,7 @@ function Hint(props: ComponentProps<any>) {
             <div> No Trailer </div>
           ) : (
             <video
+              key={movie}
               className="video"
               width="500"
               height="300"

@@ -2,11 +2,11 @@ import "./Victory.css";
 import { useEffect, useState } from "react";
 import CountdownTimer from "./CountdownTimer";
 import { ComponentProps } from "react";
+import server from "./global.tsx";
 
 function Victory(props: ComponentProps<any>) {
   //const local = "http://127.0.0.1:5000";
   const [isCopied, setIsCopied] = useState(false);
-  const server = "https://shinjinsos.pythonanywhere.com";
 
   const [timeUntilNextDay, setTimeUntilNextDay] = useState<number>();
 
@@ -18,7 +18,7 @@ function Victory(props: ComponentProps<any>) {
       .then((data) => {
         setTimeUntilNextDay(Math.trunc(data));
       });
-  }, []);
+  });
 
   useEffect(() => {
     console.log(timeUntilNextDay);

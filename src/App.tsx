@@ -24,59 +24,14 @@ function App() {
   const [closed, setClosed] = useState(false);
   const [currDay, setCurrDay] = useState<string>();
 
-  useMemo(() => {
-    if (!data) return <p>Loading...</p>;
-    if (data.colors["victory"]) setGameOver(true);
+  function clearGameData() {
+    setApp_id(null);
+    setRowList([]);
+    setGameOver(false);
+    setClosed(false);
+  }
 
-    localStorage.setItem(
-      "rowCache" + rowList.length,
-      JSON.stringify({ data, app_id })
-    );
-
-    localStorage.setItem("rowlen", JSON.stringify(rowList.length + 1));
-
-    setRowList([<Row data={data} app_id={app_id} key={app_id} />, ...rowList]);
-  }, [data]);
-
-  useEffect(() => {
-    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
-      method: "GET",
-    })
-      .then((response) => response.text())
-      .then((data) => setCurrDay(data));
-  }, []);
-
-  useEffect(() => {
-    if (gameOver) {
-      localStorage.setItem("gameOver", "true");
-    }
-
-    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
-      method: "GET",
-    })
-      .then((response) => response.text())
-      .then((data) => {
-        setCurrDay(data);
-        localStorage.setItem("day", data);
-      });
-  }, [gameOver]);
-
-  useEffect(() => {
-    console.log("checking day" + currDay);
-    if (currDay && currDay != localStorage.getItem("day")) {
-      setClosed(false);
-      setGameOver(false);
-      setRowList([]);
-      localStorage.clear();
-      localStorage.setItem("day", currDay);
-    }
-
-    const gameOverCache = localStorage.getItem("gameOver");
-
-    if (gameOverCache == "true") {
-      setGameOver(true);
-    }
-
+  function loadGameData() {
     const rowlen = localStorage.getItem("rowlen");
     let rowLenNum;
     if (rowlen) {
@@ -97,14 +52,71 @@ function App() {
     }
 
     setRowList(newArray ? newArray.reverse() : []);
+  }
+
+  useMemo(() => {
+    if (!data) return <p>Loading...</p>;
+    if (data.colors["victory"]) setGameOver(true);
+
+    localStorage.setItem(
+      "rowCache" + rowList.length,
+      JSON.stringify({ data, app_id })
+    );
+
+    localStorage.setItem("rowlen", JSON.stringify(rowList.length + 1));
+
+    setRowList([<Row data={data} app_id={app_id} key={app_id} />, ...rowList]);
+  }, [data]);
+
+  // Fetch the current day when the component mounts
+  useEffect(() => {
+    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
+      method: "GET",
+    })
+      .then((response) => response.text())
+      .then((data) => setCurrDay(data));
+
+    const gameOverCache = localStorage.getItem("gameOver");
+
+    if (gameOverCache == "true") {
+      setGameOver(true);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   if (gameOver) {
+  //     localStorage.setItem("gameOver", "true");
+  //   }
+
+  //   fetch("https://shinjinsos.pythonanywhere.com/getDay", {
+  //     method: "GET",
+  //   })
+  //     .then((response) => response.text())
+  //     .then((data) => {
+  //       setCurrDay(data);
+  //       localStorage.setItem("day", data);
+  //     });
+  // }, [gameOver]);
+
+  useEffect(() => {
+    console.log("checking day" + currDay);
+    if (currDay && currDay != localStorage.getItem("day")) {
+      clearGameData();
+      localStorage.clear();
+      localStorage.setItem("day", currDay);
+    } else {
+      loadGameData();
+    }
   }, [currDay]);
 
   return (
     <div className="App bg-linear-to-r/srgb from-slate-800 to-slate-950">
       <img className="logo" src={steamdlelogo} />
+
       <Achievements rowLen={rowList.length} />
       <Hint rowLen={rowList.length} />
       <DescriptionHint rowLen={rowList.length} />
+
       {gameOver && !closed && (
         <Victory stateChanger={setClosed} rowLen={rowList.length} />
       )}

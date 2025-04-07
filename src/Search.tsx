@@ -18,8 +18,15 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
   const [setData, setApp_id] = stateChanger;
 
   const [prevInputs, setPrevInputs] = useState<string[]>([]); // Array to store prevInputs
+  const [currDay, setCurrDay] = useState<string>("");
 
   useEffect(() => {
+    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
+      method: "GET",
+    })
+      .then((response) => response.text())
+      .then((data) => setCurrDay(data));
+
     let cacheInputs = localStorage.getItem("prevInputs");
     console.log("cacheInputs: " + cacheInputs);
     if (cacheInputs) {
@@ -28,15 +35,17 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
   }, []);
 
   useEffect(() => {
+    if (currDay != localStorage.getItem("currDay")) {
+      localStorage.setItem("prevInputs", JSON.stringify([]));
+      localStorage.setItem("currDay", currDay);
+      setPrevInputs([]);
+    }
+  }, [currDay]);
+
+  useEffect(() => {
     localStorage.setItem("prevInputs", JSON.stringify(prevInputs));
     console.log("prevInputs updated: " + prevInputs);
   }, [prevInputs]);
-
-  // useEffect(() => {
-  //   console.log("options updated: " + options);
-  // }, [options]);
-
-  //handles when a game is clicked
 
   function handleGetRequest(pram: number) {
     //console.log("fetching game with id: " + pram);
