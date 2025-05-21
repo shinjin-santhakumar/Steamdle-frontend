@@ -98,19 +98,22 @@ function App() {
   }, [data]);
 
   return (
-    <div className="App bg-linear-to-r/srgb from-slate-800 to-slate-950">
-      <img className="logo" src={steamdlelogo} />
-      <Analytics />
-      <Achievements rowLen={rowList.length} />
-      <Hint rowLen={rowList.length} />
-      <DescriptionHint rowLen={rowList.length} />
+    <div>
+      <div className="App bg-linear-to-r/srgb from-slate-800 to-slate-950">
+        <img className="logo" src={steamdlelogo} />
 
-      {gameOver && !closed && (
-        <Victory stateChanger={setClosed} rowLen={rowList.length} />
-      )}
-      {!gameOver && <SearchBar stateChanger={[setData, setApp_id]} />}
-      <Banner />
-      <header className="App-header ">{rowList}</header>
+        <Achievements rowLen={rowList.length} />
+        <Hint rowLen={rowList.length} />
+        <DescriptionHint rowLen={rowList.length} />
+
+        {gameOver && !closed && (
+          <Victory stateChanger={setClosed} rowLen={rowList.length} />
+        )}
+        {!gameOver && <SearchBar stateChanger={[setData, setApp_id]} />}
+        <Banner />
+        <header className="App-header ">{rowList}</header>
+      </div>
+      <Analytics />
     </div>
   );
 }
