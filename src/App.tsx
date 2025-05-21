@@ -9,6 +9,7 @@ import Victory from "./Victory.tsx";
 import Achievements from "./Achievements.tsx";
 import Banner from "./Banner.tsx";
 import DescriptionHint from "./DescriptionHint.tsx";
+import { Analytics } from "@vercel/analytics/next";
 
 interface data {
   colors: { [key: string]: boolean };
@@ -99,7 +100,7 @@ function App() {
   return (
     <div className="App bg-linear-to-r/srgb from-slate-800 to-slate-950">
       <img className="logo" src={steamdlelogo} />
-
+      <Analytics />
       <Achievements rowLen={rowList.length} />
       <Hint rowLen={rowList.length} />
       <DescriptionHint rowLen={rowList.length} />
