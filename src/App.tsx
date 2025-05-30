@@ -9,7 +9,7 @@ import Victory from "./Victory.tsx";
 import Achievements from "./Achievements.tsx";
 import Banner from "./Banner.tsx";
 import DescriptionHint from "./DescriptionHint.tsx";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 interface data {
   colors: { [key: string]: boolean };
