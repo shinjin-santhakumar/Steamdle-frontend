@@ -18,7 +18,9 @@
     "next": "^15.3.2",
     "react": "^18.3.1",
     "react-autosuggest": "^10.1.0",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-player": "^3.4.0",
+    "shaka-player": "^5.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

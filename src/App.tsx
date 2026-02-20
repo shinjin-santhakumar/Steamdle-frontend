@@ -10,6 +10,7 @@ import Achievements from "./Achievements.tsx";
 import Banner from "./Banner.tsx";
 import DescriptionHint from "./DescriptionHint.tsx";
 import { Analytics } from "@vercel/analytics/react";
+import server from "./global.tsx";
 
 interface data {
   colors: { [key: string]: boolean };
@@ -57,7 +58,7 @@ function App() {
 
   // Fetch the current day when the component mounts
   useEffect(() => {
-    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
+    fetch(server + "/getDay", {
       method: "GET",
     })
       .then((response) => response.text())
@@ -89,7 +90,7 @@ function App() {
 
     localStorage.setItem(
       "rowCache" + rowList.length,
-      JSON.stringify({ data, app_id })
+      JSON.stringify({ data, app_id }),
     );
 
     localStorage.setItem("rowlen", JSON.stringify(rowList.length + 1));

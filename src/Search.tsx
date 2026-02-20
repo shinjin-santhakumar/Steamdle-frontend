@@ -21,7 +21,7 @@ function DebouncedSearchBar({ stateChanger }: { stateChanger: StateChanger }) {
   const [currDay, setCurrDay] = useState<string>("");
 
   useEffect(() => {
-    fetch("https://shinjinsos.pythonanywhere.com/getDay", {
+    fetch(server + "/getDay", {
       method: "GET",
     })
       .then((response) => response.text())
